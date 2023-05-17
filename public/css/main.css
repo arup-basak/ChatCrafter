@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+* {
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+input {
+    padding: 8px;
+    outline: none;
+}
+
+button {
+    padding: 8px;
+    outline: none;
+}

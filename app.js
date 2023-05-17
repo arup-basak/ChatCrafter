@@ -12,8 +12,16 @@ app.get('/', (req, res) => {
 });
 
 // Socket.IO connection event
-io.on('connection', (socket, e) => {
+io.on('connection', (socket) => {
   console.log(`A user connected`);
+
+  socket.on('join', (rooms) => {
+    const roomsArr = rooms.split(",")
+
+    roomsArr.forEach((room) => {
+      socket.join(room)
+    });
+  })
 
   // Handle chat message event
   socket.on('chat message', (msg) => {

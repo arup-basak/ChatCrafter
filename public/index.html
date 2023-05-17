@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/chat.css" />
     <title>Chat</title>
@@ -13,9 +14,10 @@
         <div class="message message-right">Message1</div>
         <div class="message message-left">Message2</div>
     </div>
-
-    <input type="text" id="message-bar" autocomplete="off"/>
-    <button id="send-button">Click Here!</button>
+    <div>
+        <input type="text" id="message-bar" autocomplete="off"/>
+        <button id="send-button">Send</button>
+    </div>
 
     <!-- script imports -->
     <script src="/socket.io/socket.io.js"></script>

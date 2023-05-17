@@ -1,3 +1,19 @@
+#chat-area {
+    height: 80vh;
+    overflow-y: scroll;
+    width: 100%;
+    background: #aedfff;
+    margin: 0;
+}
+
+.message {
+    padding: 12px;
+    margin: 8px;
+    border-radius: 6px;
+    background-color: aqua;
+    width: fit-content;
+}
+
 .message-left {
     color: blue;
 }
@@ -5,3 +21,4 @@
 .message-right {
     color: red;
 }
+
