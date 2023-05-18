@@ -21,11 +21,16 @@ const sendMessage = (msg) => {
     // addMessage(message, true);
     const date = new Date()
     const message = {
+        user: userId,
         time: date.toString(),
         message: msg,
         room: currentRoom
     }
     socket.emit("chat message", message)
+}
+
+const newChat = (userid) => {
+    socket.emit('create-room', {username: userid})
 }
 
 socket.on("message-to-user", (msg) => {
