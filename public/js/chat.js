@@ -53,7 +53,7 @@ fetch('/chatdata')
                         if(item.type === 'chat'){
                             chatarea.innerHTML = ""
                             chats.forEach((msg) => {
-                                addMessage(msg.message, msg.userId === userId)
+                                addMessage(msg.message, msg.user === userId)
                             })
                         }
                     })
