@@ -1,9 +1,12 @@
 const express = require('express');
 const NodeCache = require("node-cache");
+const DBUpdate = require('./lib/DBUpdate');
 const DBHelper = require('./lib/DBHelper');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+
+// const { insertChatRoom } = require('./lib/DBHelper');
 
 const myCache = new NodeCache();
 const cache = {
@@ -35,7 +38,7 @@ app.get('/', checkLogin, (req, res) => {
 });
 
 app.get('/chat', checkLogin, (req, res) => {
-  res.sendFile(__dirname + '/public/chat.html', {name: "arup"});
+  res.sendFile(__dirname + '/public/chat.html', { name: "arup" });
 });
 
 app.get('/login', (req, res) => {
@@ -57,6 +60,13 @@ app.get('/savecache', (req, res) => {
 app.get('/whoami', (req, res) => {
   res.json(myCache.get('userkey'));
 });
+
+app.get('/createchat', (req, res) => {
+  const { user } = req.query;
+  const b = new DBHelper.insertChatRoom(user, cache.username);
+
+  res.json({ 'response': b })
+})
 
 app.get('/chatdata', async (req, res) => {
   try {
@@ -97,8 +107,8 @@ io.on('connection', (socket) => {
 
   // Handle chat message event
   socket.on('chat message', (msg) => {
-    console.log(msg);
     socket.join(msg.room)
+    DBHelper.updateChat(msg.room, msg.message, msg.user)
     io.to(msg.room).emit("message-to-user", msg);
   });
 
@@ -106,6 +116,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('A user disconnected');
   });
+
+  socket.on('create-room', (msg) => {
+    DBHelper.createChatRoom(cache.username, msg.username);
+  })
 });
 
 // Start the server

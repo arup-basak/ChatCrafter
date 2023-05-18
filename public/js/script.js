@@ -26,6 +26,8 @@ addButton.addEventListener('click', () => {
 
 addInput.addEventListener('keypress', (e) => {
     if(e.key === 'Enter') {
+        newChat(addInput.value)
+        addInput.value = ""
         addInput.style.display = 'none'
         addButton.style.display = 'block'
     }
