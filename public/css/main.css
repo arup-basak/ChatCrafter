@@ -5,12 +5,11 @@
     font-family: 'Inter', sans-serif;
 }
 
-input {
-    padding: 8px;
-    outline: none;
-}
-
-button {
-    padding: 8px;
-    outline: none;
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }

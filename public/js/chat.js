@@ -50,7 +50,7 @@ fetch('/chatdata')
                     .then(response => response.json())
                     .then((item) => {
                         const chats = item.chat;
-                        if(item.type === 'chat'){
+                        if(item.type === 'chat') {
                             chatarea.innerHTML = ""
                             chats.forEach((msg) => {
                                 addMessage(msg.message, msg.user === userId)

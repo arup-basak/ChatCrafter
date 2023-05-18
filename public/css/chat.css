@@ -1,6 +1,7 @@
 .container {
     display: grid;
     grid-template-columns: 300px 1fr;
+    height: 94vh;
 }
 
 .chat-container {
@@ -14,17 +15,23 @@
     border-radius: 8px;
 }
 
+.chat {
+    display: grid;
+    grid-template-rows: 1fr 30px;
+}
+
 .chats {
     overflow-y: scroll;
 }
 
 #chat-area {
-    height: 80vh;
     overflow-y: scroll;
     width: 100%;
     border-radius: 8px;
     background: #aedfff;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
@@ -33,13 +40,16 @@
     border-radius: 6px;
     background-color: aqua;
     width: fit-content;
+    max-width: 300px;
 }
 
 .message-left {
-    color: blue;
+    background-color: #f2f2f2;
+    align-self: flex-start;
+
 }
 
 .message-right {
-    color: red;
+    background-color: #dcf8c6;
+    align-self: flex-end;
 }
-

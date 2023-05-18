@@ -9,9 +9,13 @@ const io = require('socket.io')(http);
 app.use(express.static('public'));
 
 // Route for the homepage
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+app.get('/index', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
 });
+
+// app.get('/chat', (req, res) => {
+//   res.sendFile(__dirname + '/public/index.html');
+// });
 
 app.get('/chatdata', async (req, res) => {
   try {
