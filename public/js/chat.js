@@ -26,7 +26,8 @@ const sendMessage = (msg) => {
 }
 
 socket.on("message-to-user", (msg) => {
-    addMessage(msg.message, false);
+    // addMessage(msg.message, false);
+    console.log(msg)
 })
 
 fetch('/chatdata')

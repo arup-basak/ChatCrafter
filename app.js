@@ -1,26 +1,8 @@
 const express = require('express');
+const DBHelper = require('./lib/DBHelper');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-
-const msgData = [
-  {
-    room: "aguisfff",
-    type: "chat",
-    users: ['arup', 'S Das']
-  },
-  {
-    room: "fgyabkjdc",
-    type: "chat",
-    users: ['A Ranjan', 'arup']
-  },
-  {
-    room: "yfagkhcn",
-    type: "chat",
-    users: ['arup', 'S Ghosh']
-  }
-];
-
 
 const chats = [
   {
@@ -101,10 +83,18 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/chatdata', (req, res) => {
-  res.json(msgData);
+app.get('/chatdata', async (req, res) => {
+  try {
+    const chatRooms = await DBHelper.getAllChatRooms();
+    res.json(chatRooms)
+  }
+  catch {
+    res.status(500).json({ error: 'Failed to get chat rooms.' });
+  }
+  // res.json(msgData);
 });
 
+// get total chat as JSON whan 
 app.get('/getchat', (req, res) => {
   const { room } = req.query;
   const chatData = chats.find(chat => chat.room === room);
