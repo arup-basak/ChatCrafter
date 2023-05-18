@@ -1,5 +1,5 @@
 const chatarea = document.querySelector("#chat-area")
-const chats = document.querySelector("#chats")
+const chatsElem = document.querySelector("#chats")
 let chatItems = []
 
 const socket = io(); // Initialization 
@@ -33,7 +33,6 @@ fetch('/chatdata')
 .then(response => response.json())
 .then(data => {
     data.forEach(item => {
-            console.log(item.users)
             const elem = document.createElement('div');
             elem.classList.add('chat-container')
             elem.setAttribute('id', item.room);
@@ -45,14 +44,21 @@ fetch('/chatdata')
             }
 
             elem.onclick = () => {
+                currentRoom = item.room
                 fetch(`/getchat?room=${item.room}`)
                     .then(response => response.json())
                     .then((item) => {
-                        console.log(item);
+                        const chats = item.chat;
+                        if(item.type === 'chat'){
+                            chatarea.innerHTML = ""
+                            chats.forEach((msg) => {
+                                addMessage(msg.message, msg.userId === userId)
+                            })
+                        }
                     })
             }
 
-            chats.appendChild(elem);
+            chatsElem.appendChild(elem);
         });
 
         chatItems = document.querySelectorAll('chat-container')

@@ -25,6 +25,7 @@ const msgData = [
 const chats = [
   {
     room: "aguisfff",
+    type: "chat",
     chat: [
       {
         message: "Hello How are you",
@@ -50,6 +51,7 @@ const chats = [
   },
   {
     room: "fgyabkjdc",
+    type: "chat",
     chat: [
       {
         message: "Hi, everyone!",
@@ -67,6 +69,7 @@ const chats = [
   },
   {
     room: "yfagkhcn",
+    type: "chat",
     chat: [
       {
         message: "Hey, arup!",
