@@ -2,37 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="./css/chat.css" />
-    <title>Chat</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <title>Login</title>
 </head>
 
 <body>
     <div class="container">
-        <div id="chats"></div>
-        <div class="chat">
-            <div id="chat-area">
-                <div class="message message-right">Message1</div>
-                <div class="message message-left">Message2</div>
+        <div class="loginbox">
+            <span class="heading">ChatCrafter</span>
+            <img src="logo_temp.png" alt="" />
+            <div class="username">
+                <input 
+                    id="username"
+                    type="text"
+                    placeholder="Username" 
+                    autocomplete="off" />
             </div>
-            <div>
-                <input type="text" id="message-bar" autocomplete="off" />
-                <button id="send-button">
-                    <!-- <img src="./icons/send.svg" class="send-icon"/> -->
-                    send
-                </button>
+            <div class="pass">
+                <input 
+                    id="password"
+                    type="password" 
+                    placeholder="Password" 
+                    autocomplete="off" />
             </div>
+            <button class="login">login</button>
         </div>
     </div>
-
-    <!-- script imports -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/chat.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="./js/login.js"></script>
 </body>
-
 </html>

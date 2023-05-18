@@ -1,21 +1,47 @@
 const express = require('express');
+const NodeCache = require("node-cache");
 const DBHelper = require('./lib/DBHelper');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
+const myCache = new NodeCache();
+const cache = {
+  username: "",
+  password: ""
+};
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
 // Route for the homepage
-app.get('/index', (req, res) => {
+app.get('/', (req, res) => {
+  const data = myCache.get('userkey');
+  if (data.username > 0 && data.password > 0) {
+    // Login Check
+    res.redirect('/chat')
+  }
   res.sendFile(__dirname + '/public/login.html');
 });
 
-// app.get('/chat', (req, res) => {
-//   res.sendFile(__dirname + '/public/index.html');
-// });
+app.get('/chat', (req, res) => {
+  res.sendFile(__dirname + '/public/chat.html');
+});
+
+app.get('/savecache', (req, res) => {
+  const { username, password } = req.query;
+  if (username.length > 0 && password.length > 0) {
+    cache.username = username;
+    cache.password = password;
+    myCache.set('userkey', cache, 2592000);
+    res.redirect('/chat')
+  }
+  req.redirect('/login')
+})
+
+app.get('/whoami', (req, res) => {
+  res.json({ user: myCache.get('userkey') })
+})
 
 app.get('/chatdata', async (req, res) => {
   try {
@@ -25,7 +51,6 @@ app.get('/chatdata', async (req, res) => {
   catch {
     res.status(500).json({ error: 'Failed to get chat rooms.' });
   }
-  // res.json(msgData);
 });
 
 // get total chat as JSON whan 
@@ -33,7 +58,7 @@ app.get('/getchat', async (req, res) => {
   const { room } = req.query;
   const chats = await DBHelper.getAllChats()
   const chat = chats.find(item => item.room === room)
-  
+
   if (chat) {
     res.json(chat);
   } else {
