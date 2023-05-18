@@ -1,5 +1,7 @@
 const chatarea = document.querySelector("#chat-area")
 const chatsElem = document.querySelector("#chats")
+const addButton = document.querySelector('#add-button')
+const addInput = document.querySelector('.add-input')
 
 let chatItems = []
 

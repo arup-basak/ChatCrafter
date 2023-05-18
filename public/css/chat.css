@@ -4,7 +4,7 @@
     height: 94vh;
 }
 
-.chat-container {
+.chat-container, .add-button-container {
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -13,6 +13,14 @@
     margin: 6px;
     margin-top: 0;
     border-radius: 8px;
+}
+
+.add-button-container {
+    margin-bottom: 18px;
+}
+
+#add-button {
+    height: 20px;
 }
 
 .chat {
