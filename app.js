@@ -22,6 +22,74 @@ const msgData = [
 ];
 
 
+const chats = [
+  {
+    room: "aguisfff",
+    chat: [
+      {
+        message: "Hello How are you",
+        user: "S Das"
+      },
+      {
+        message: "I'm fine",
+        user: "arup"
+      },
+      {
+        message: "That's great to hear!",
+        user: "S Das"
+      },
+      {
+        message: "By the way, have you seen the latest movie?",
+        user: "S Das"
+      },
+      {
+        message: "No, I haven't. Is it any good?",
+        user: "arup"
+      }
+    ]
+  },
+  {
+    room: "fgyabkjdc",
+    chat: [
+      {
+        message: "Hi, everyone!",
+        user: "A Ranjan"
+      },
+      {
+        message: "Hey! How's it going?",
+        user: "arup"
+      },
+      {
+        message: "I'm doing well. Thanks for asking!",
+        user: "A Ranjan"
+      }
+    ]
+  },
+  {
+    room: "yfagkhcn",
+    chat: [
+      {
+        message: "Hey, arup!",
+        user: "S Ghosh"
+      },
+      {
+        message: "Hello! What's up?",
+        user: "arup"
+      },
+      {
+        message: "Not much. Just working on a project.",
+        user: "S Ghosh"
+      },
+      {
+        message: "That sounds interesting. Tell me more about it.",
+        user: "arup"
+      }
+    ]
+  }
+];
+
+
+
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
@@ -31,8 +99,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/chatdata', (req, res) => {
-  res.send(msgData);
+  res.json(msgData);
 });
+
+app.get('/getchat', (req, res) => {
+  const { room } = req.query;
+  const chatData = chats.find(chat => chat.room === room);
+  
+  if (chatData) {
+    res.json(chatData);
+  } else {
+    res.status(404).json({ error: "Chat room not found" });
+  }
+});
+
 
 // Socket.IO connection event
 io.on('connection', (socket) => {

@@ -1,4 +1,3 @@
-
 const chatarea = document.querySelector("#chat-area")
 const chats = document.querySelector("#chats")
 let chatItems = []
@@ -46,9 +45,13 @@ fetch('/chatdata')
             }
 
             elem.onclick = () => {
-                console.log(item.room)
+                fetch(`/getchat?room=${item.room}`)
+                    .then(response => response.json())
+                    .then((item) => {
+                        console.log(item);
+                    })
             }
-            
+
             chats.appendChild(elem);
         });
 
