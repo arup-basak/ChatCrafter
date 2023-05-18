@@ -1,11 +1,12 @@
 const chatarea = document.querySelector("#chat-area")
 const chatsElem = document.querySelector("#chats")
+
 let chatItems = []
 
 const socket = io(); // Initialization 
 
 let currentRoom = "" //Room will update on change chat
-let userId = "arup"
+let userId = ""
 
 const addMessage = (msg, side) => { // side --> boolean; true -> right, false -> left
     const elem = document.createElement('div');
@@ -29,6 +30,15 @@ socket.on("message-to-user", (msg) => {
     addMessage(msg.message, false);
     // console.log(msg)
 })
+
+const hiddenDiv = document.querySelector(".hidden")
+
+fetch('/whoami')
+.then(response => response.json())
+.then(data => {
+    userId = data.username
+})
+
 
 fetch('/chatdata')
 .then(response => response.json())

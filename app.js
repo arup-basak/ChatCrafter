@@ -35,7 +35,7 @@ app.get('/', checkLogin, (req, res) => {
 });
 
 app.get('/chat', checkLogin, (req, res) => {
-  res.sendFile(__dirname + '/public/chat.html');
+  res.sendFile(__dirname + '/public/chat.html', {name: "arup"});
 });
 
 app.get('/login', (req, res) => {
@@ -55,7 +55,7 @@ app.get('/savecache', (req, res) => {
 });
 
 app.get('/whoami', (req, res) => {
-  res.json({ user: myCache.get('userkey') });
+  res.json(myCache.get('userkey'));
 });
 
 app.get('/chatdata', async (req, res) => {
