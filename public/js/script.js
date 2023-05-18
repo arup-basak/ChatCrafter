@@ -3,6 +3,7 @@ const sendButton = document.querySelector("#send-button");
 
 const send = () => {
     if(input.value.length != 0) {
+        console.log('sending')
         sendMessage(input.value)
         input.value = ""
     }
