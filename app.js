@@ -4,76 +4,6 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-const chats = [
-  {
-    room: "aguisfff",
-    type: "chat",
-    chat: [
-      {
-        message: "Hello How are you",
-        user: "S Das"
-      },
-      {
-        message: "I'm fine",
-        user: "arup"
-      },
-      {
-        message: "That's great to hear!",
-        user: "S Das"
-      },
-      {
-        message: "By the way, have you seen the latest movie?",
-        user: "S Das"
-      },
-      {
-        message: "No, I haven't. Is it any good?",
-        user: "arup"
-      }
-    ]
-  },
-  {
-    room: "fgyabkjdc",
-    type: "chat",
-    chat: [
-      {
-        message: "Hi, everyone!",
-        user: "A Ranjan"
-      },
-      {
-        message: "Hey! How's it going?",
-        user: "arup"
-      },
-      {
-        message: "I'm doing well. Thanks for asking!",
-        user: "A Ranjan"
-      }
-    ]
-  },
-  {
-    room: "yfagkhcn",
-    type: "chat",
-    chat: [
-      {
-        message: "Hey, arup!",
-        user: "S Ghosh"
-      },
-      {
-        message: "Hello! What's up?",
-        user: "arup"
-      },
-      {
-        message: "Not much. Just working on a project.",
-        user: "S Ghosh"
-      },
-      {
-        message: "That sounds interesting. Tell me more about it.",
-        user: "arup"
-      }
-    ]
-  }
-];
-
-
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
@@ -95,14 +25,15 @@ app.get('/chatdata', async (req, res) => {
 });
 
 // get total chat as JSON whan 
-app.get('/getchat', (req, res) => {
+app.get('/getchat', async (req, res) => {
   const { room } = req.query;
-  const chatData = chats.find(chat => chat.room === room);
+  const chats = await DBHelper.getAllChats()
+  const chat = chats.find(item => item.room === room)
   
-  if (chatData) {
-    res.json(chatData);
+  if (chat) {
+    res.json(chat);
   } else {
-    res.status(404).json({ error: "Chat room not found" });
+    res.status(404).json({ error: "Chat not found" });
   }
 });
 
