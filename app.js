@@ -17,10 +17,15 @@ app.use(express.static('public'));
 // Middleware to check login status
 const checkLogin = (req, res, next) => {
   const data = myCache.get('userkey');
-  if (data.username.length > 0 && data.password.length > 0) {
-    next(); // User logged in, proceed to the next middleware/route handler
-  } else {
-    res.redirect('/login'); // User not logged in, redirect to login page
+  try {
+    if (data.username.length > 0 && data.password.length > 0) {
+      next(); // User logged in, proceed to the next middleware/route handler
+    } else {
+      res.redirect('/'); // User not logged in, redirect to login page
+    }
+  }
+  catch {
+    res.redirect('/'); // User not logged in, redirect to login page
   }
 };
 
@@ -66,12 +71,12 @@ app.get('/getchat', async (req, res) => {
   const { room } = req.query;
   try {
     const chats = await DBHelper.getAllChats();
-    const chat = chats.find(item => item.room === room);
+    const roomChat = chats.find(item => item.room === room);
 
-    if (chat) {
-      res.json(chat);
+    if (roomChat) {
+      res.json(roomChat);
     } else {
-      res.status(404).json({ error: "Chat not found" });
+      res.status(404).json({ error: "Chat not found for the specified room" });
     }
   } catch (error) {
     res.status(500).json({ error: 'Failed to get chat.' });
@@ -93,6 +98,7 @@ io.on('connection', (socket) => {
   // Handle chat message event
   socket.on('chat message', (msg) => {
     console.log(msg);
+    socket.join(msg.room)
     io.to(msg.room).emit("message-to-user", msg);
   });
 

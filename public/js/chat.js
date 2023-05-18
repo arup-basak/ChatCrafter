@@ -26,8 +26,8 @@ const sendMessage = (msg) => {
 }
 
 socket.on("message-to-user", (msg) => {
-    // addMessage(msg.message, false);
-    console.log(msg)
+    addMessage(msg.message, false);
+    // console.log(msg)
 })
 
 fetch('/chatdata')
@@ -46,9 +46,10 @@ fetch('/chatdata')
 
             elem.onclick = () => {
                 currentRoom = item.room
-                fetch(`/getchat?room=${item.room}`)
+                fetch(`${window.location.origin}/getchat?room=${item.room}`)
                     .then(response => response.json())
                     .then((item) => {
+                        console.log(item)
                         const chats = item.chat;
                         if(item.type === 'chat') {
                             chatarea.innerHTML = ""
@@ -56,7 +57,10 @@ fetch('/chatdata')
                                 addMessage(msg.message, msg.user === userId)
                             })
                         }
+                    }).catch((e) => {
+                        console.log(e)
                     })
+                    
             }
 
             chatsElem.appendChild(elem);
