@@ -150,7 +150,7 @@ io.on('connection', (socket) => {
         socket.emit('AI reply', elem[elem.length-1].data.answer)
       })
       .catch((e) => {
-        console.log(item)
+        console.log(e)
       })
   }
 });
