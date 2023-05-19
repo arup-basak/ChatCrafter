@@ -10,18 +10,21 @@ button {
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 4px;
-    background-color: rgb(129, 129, 129);
+    background-color: rgba(129, 129, 129, 0.70);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: 300;
+    transition-delay: 200;
+    color: white;
 }
 
 button:hover {
-    background-color: rgb(85, 85, 85);
+    background-color: rgba(129, 129, 129, 0.8);
 }
 
 .container {
     display: grid;
     grid-template-columns: 300px 1fr;
+    gap: 12px;
 }
 
 .chat-container, .add-button-container {
@@ -29,13 +32,14 @@ button:hover {
     flex-direction: column;
     cursor: pointer;
     padding: 10px;
-    background-color: #dadada50;;
+    background-color: #86868675;
     margin: 6px;
     margin-top: 0;
     border-radius: 8px;
 }
 
 .add-button-container {
+    margin-top: 12px;
     margin-bottom: 18px;
     border: 1px solid rgb(221, 221, 221)
 }
@@ -45,7 +49,8 @@ button:hover {
 }
 
 .side-bar {
-    color: #646464;
+    color: #222222;
+    background-color: #dadada50;
 }
 
 .chat {
