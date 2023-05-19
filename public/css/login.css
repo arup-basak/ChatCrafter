@@ -21,7 +21,9 @@
     background-color: #d1d1d15b;
     padding: 18px;
     border-radius: 5px;
-    max-width: 500px;
+    width: 30%;
+    min-width: 350px;
+    max-width: 420px;
     height: 60%;
 }
 
@@ -52,8 +54,8 @@
 }
 
 input {
-    height: 5vh;
-    width: 20vw;
+    height: 4vh;
+    width: 80%;
     padding-right: 18px;
     padding-left: 18px;
 }

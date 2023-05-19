@@ -18,7 +18,6 @@ const addMessage = (msg, side) => { // side --> boolean; true -> right, false ->
 }
 
 const sendMessage = (msg) => {
-    // addMessage(message, true);
     const date = new Date()
     const message = {
         user: userId,
@@ -35,7 +34,6 @@ const newChat = (userid) => {
 
 socket.on("message-to-user", (msg) => {
     addMessage(msg.message, false);
-    // console.log(msg)
 })
 
 const hiddenDiv = document.querySelector(".hidden")

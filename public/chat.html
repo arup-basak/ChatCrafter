@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <div>
+        <div class="side-bar">
             <div class="add-button-container">
                 <img 
                     id="add-button"
@@ -28,11 +28,14 @@
         </div>
         <div class="chat">
             <div id="chat-area"></div>
-            <div>
-                <input type="text" id="message-bar" autocomplete="off" />
+            <div class="user-area">
+                <input 
+                    placeholder="Type Message Here..."
+                    type="text" 
+                    id="message-bar" 
+                    autocomplete="off" />
                 <button id="send-button">
-                    <!-- <img src="./icons/send.svg" class="send-icon"/> -->
-                    send
+                    Send
                 </button>
             </div>
         </div>

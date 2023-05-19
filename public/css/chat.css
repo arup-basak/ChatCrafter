@@ -1,7 +1,27 @@
+input {
+    margin: 8px;
+    margin-right: 0;
+    padding: 12px;
+}
+
+button {
+    margin: 8px;
+    margin-left: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 4px;
+    background-color: rgb(129, 129, 129);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 300;
+}
+
+button:hover {
+    background-color: rgb(85, 85, 85);
+}
+
 .container {
     display: grid;
     grid-template-columns: 300px 1fr;
-    height: 94vh;
 }
 
 .chat-container, .add-button-container {
@@ -9,7 +29,7 @@
     flex-direction: column;
     cursor: pointer;
     padding: 10px;
-    background-color: rgb(216, 216, 216);
+    background-color: #dadada50;;
     margin: 6px;
     margin-top: 0;
     border-radius: 8px;
@@ -17,15 +37,24 @@
 
 .add-button-container {
     margin-bottom: 18px;
+    border: 1px solid rgb(221, 221, 221)
 }
 
 #add-button {
     height: 20px;
 }
 
+.side-bar {
+    color: #646464;
+}
+
 .chat {
     display: grid;
-    grid-template-rows: 1fr 30px;
+    grid-template-rows: 1fr min-content;
+    border-radius: 8px;
+    background: #dadada50;
+    height: max-content;
+    height: 98vh;
 }
 
 .chats {
@@ -35,8 +64,6 @@
 #chat-area {
     overflow-y: scroll;
     width: 100%;
-    border-radius: 8px;
-    background: #aedfff;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -46,18 +73,23 @@
     padding: 12px;
     margin: 8px;
     border-radius: 6px;
-    background-color: aqua;
     width: fit-content;
     max-width: 300px;
 }
 
 .message-left {
-    background-color: #f2f2f2;
+    background-color: #eee676;
     align-self: flex-start;
 
 }
 
 .message-right {
-    background-color: #dcf8c6;
+    background-color: #89f080;
     align-self: flex-end;
+}
+
+.user-area {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    gap: 12px;
 }

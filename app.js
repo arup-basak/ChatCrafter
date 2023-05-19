@@ -1,6 +1,5 @@
 const express = require('express');
 const NodeCache = require("node-cache");
-const DBUpdate = require('./lib/DBUpdate');
 const DBHelper = require('./lib/DBHelper');
 const app = express();
 const http = require('http').createServer(app);
