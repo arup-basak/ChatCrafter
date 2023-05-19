@@ -10,11 +10,13 @@ const socket = io(); // Initialization
 let currentRoom = "" //Room will update on change chat
 let userId = ""
 
-const addMessage = (msg, side) => { // side --> boolean; true -> right, false -> left
+const addMessage = (msg, user) => { // side --> boolean; true -> right, false -> left
+    // console.log(user)
     const elem = document.createElement('div');
-    elem.classList.add('message', side ? 'message-right' : 'message-left');
+    elem.classList.add('message', user === userId ? 'message-right' : 'message-left');
     elem.innerText = msg;
     chatarea.appendChild(elem);    
+    chatarea.scrollTop = chatarea.scrollHeight;
 }
 
 const sendMessage = (msg) => {
@@ -33,10 +35,9 @@ const newChat = (userid) => {
 }
 
 socket.on("message-to-user", (msg) => {
-    addMessage(msg.message, false);
+    addMessage(msg.message, msg.user);
 })
 
-const hiddenDiv = document.querySelector(".hidden")
 
 fetch('/whoami')
 .then(response => response.json())
@@ -65,13 +66,11 @@ fetch('/chatdata')
                     .then(response => response.json())
                     .then((item) => {
                         console.log(item)
+                        chatarea.innerHTML = ""
                         const chats = item.chat;
-                        if(item.type === 'chat') {
-                            chatarea.innerHTML = ""
-                            chats.forEach((msg) => {
-                                addMessage(msg.message, msg.user === userId)
-                            })
-                        }
+                        chats.forEach((msg) => {
+                            addMessage(msg.message, msg.user)
+                        })
                     }).catch((e) => {
                         console.log(e)
                     })
