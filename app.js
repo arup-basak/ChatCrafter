@@ -107,6 +107,9 @@ io.on('connection', (socket) => {
   // Handle chat message event
   socket.on('chat message', (msg) => {
     socket.join(msg.room)
+    if (msg.room === `${cache.username}AI-CHAT`) {
+      AI(msg.room, msg.message)
+    }
     DBHelper.updateChat(msg.room, msg.message, msg.user)
     io.to(msg.room).emit("message-to-user", msg);
   });
@@ -119,6 +122,37 @@ io.on('connection', (socket) => {
   socket.on('create-room', (msg) => {
     DBHelper.createChatRoom(cache.username, msg.username);
   })
+
+
+  // AI CONTENT
+
+  const chat_history = []
+  const AI = (room, question) => {
+    socket.join(room)
+    fetch(process.env.WRITESONIC_API_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'User-Agent': 'python-requests/2.28.1',
+        'accept': 'application/json',
+        'token': process.env.WRITESONIC_API_TOKEN
+      },
+      body: JSON.stringify({
+        'question': question,
+        'chat_history': chat_history
+      })
+    })
+      .then(response => response.json())
+      .then((elem) => {
+        console.log(elem)
+        socket.emit('AI reply', elem[elem.length-1].data.answer)
+      })
+      .catch((e) => {
+        console.log(item)
+      })
+  }
 });
 
 // Start the server

@@ -38,11 +38,15 @@ socket.on("message-to-user", (msg) => {
     addMessage(msg.message, msg.user);
 })
 
+socket.on("AI reply", (msg) => {
+    addMessage(msg, "AI");
+})
 
 fetch('/whoami')
 .then(response => response.json())
 .then(data => {
     userId = data.username
+    currentRoom = userId + 'AI-CHAT'
 })
 
 
