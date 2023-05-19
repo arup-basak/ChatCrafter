@@ -5,6 +5,11 @@
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+}
+
 button {
     border: none;
     cursor: pointer;
